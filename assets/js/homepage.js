@@ -66,7 +66,7 @@ var formSubmitHandler = function(event) {
 var getUserRepos = function(user) {
     // format the github api url
     var apiUrl = "https://api.github.com/users/" + user + "/repos";
-
+    
     //make a request to the url
     fetch(apiUrl).then(function(response){
         if (response.ok) {
@@ -76,8 +76,11 @@ var getUserRepos = function(user) {
     } else {
         alert("Error: GitHub User Not Found");
     }
-});
-
+})
+    .catch(function(error) {
+        // Notice this `.catch()` getting chained onto the end of the `.then()` method
+        alert("Unable to connect to GitHub");
+    });
 };
 
 userFormEl.addEventListener("submit", formSubmitHandler);
